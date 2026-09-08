@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERABYTE - the burrito</title>
+<meta name="description" content="1 terabyte = 1,000,000,000,000 bytes. 1 burrito = 1,000,000,000,000 bites. we did the math.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='black'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle'%3E%F0%9F%8C%AF%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#000;
+  --white:#f4f1ea;
+  --dim:#8a877f;
+  --accent:#ffb01f;
+  --green:#3fa34d;
+  --line:rgba(244,241,234,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  font-size:15px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent);color:var(--black)}
+a{color:inherit}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 28px;
+  mix-blend-mode:difference;
+}
+.nav-mark{
+  font-weight:700;font-size:15px;letter-spacing:.08em;
+  border:1.5px solid var(--white);padding:3px 9px;border-radius:4px;
+}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{
+  font-size:12px;letter-spacing:.14em;text-transform:lowercase;color:var(--white);
+  opacity:.75;transition:opacity .2s;text-decoration:none;
+}
+.nav-links a:hover{opacity:1}
+#soundBtn{
+  font-family:inherit;font-size:11px;letter-spacing:.14em;
+  background:none;border:1px solid var(--white);color:var(--white);
+  padding:4px 10px;border-radius:4px;cursor:pointer;opacity:.8;
+}
+#soundBtn:hover{opacity:1}
+@media(max-width:720px){.nav-links a{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 6vw;overflow:hidden}
+.hero-kicker{font-size:13px;letter-spacing:.28em;color:var(--dim);margin-bottom:18px}
+h1{
+  font-family:'Anton',Impact,sans-serif;
+  font-size:clamp(64px,13.5vw,200px);
+  line-height:.92;letter-spacing:.01em;font-weight:400;
+  text-transform:uppercase;
+}
+h1 .accent{color:var(--accent)}
+.hero-sub{margin-top:26px;font-size:clamp(14px,1.6vw,19px);max-width:560px}
+.hero-sub em{color:var(--dim);font-style:normal}
+.hero-burrito{
+  position:absolute;right:6vw;bottom:12vh;width:clamp(120px,18vw,240px);
+  image-rendering:pixelated;
+  animation:bob 3.2s ease-in-out infinite;
+  filter:drop-shadow(0 24px 40px rgba(255,176,31,.18));
+}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-18px) rotate(3deg)}}
+@media(max-width:720px){.hero-burrito{position:static;margin-top:40px}}
+.scroll-cue{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-size:11px;letter-spacing:.3em;color:var(--dim);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+
+/* ---------- marquee ---------- */
+.marquee{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;white-space:nowrap;padding:14px 0;background:var(--black);
+}
+.marquee-track{display:inline-block;animation:scroll 26s linear infinite}
+.marquee span{
+  font-family:'Anton',Impact,sans-serif;font-size:20px;letter-spacing:.12em;
+  text-transform:uppercase;padding:0 18px;color:var(--white);
+}
+.marquee span:nth-child(even){color:var(--accent)}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{padding:110px 6vw;border-bottom:1px solid var(--line);position:relative}
+.kicker{font-size:12px;letter-spacing:.28em;color:var(--dim);margin-bottom:14px;text-transform:uppercase}
+h2{
+  font-family:'Anton',Impact,sans-serif;text-transform:uppercase;font-weight:400;
+  font-size:clamp(38px,6vw,84px);line-height:1;margin-bottom:48px;
+}
+h2 .accent{color:var(--accent)}
+
+/* spec sheet */
+.spec{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.spec .k{font-weight:700;letter-spacing:.1em;min-width:180px}
+.spec .v{color:var(--dim);text-align:right;flex:1;min-width:240px}
+.spec .v b{color:var(--white);font-weight:500}
+.spec.hot .k{color:var(--accent)}
+
+/* manifesto */
+.manifesto p{
+  font-family:'Anton',Impact,sans-serif;text-transform:uppercase;font-weight:400;
+  font-size:clamp(30px,5.2vw,72px);line-height:1.06;margin-bottom:28px;
+}
+.manifesto p.dim{color:var(--dim)}
+.manifesto p .accent{color:var(--accent)}
+.manifesto .note{
+  font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--dim);
+  text-transform:none;letter-spacing:0;line-height:1.6;max-width:520px;margin-top:44px;
+}
+
+/* readme terminal */
+.term{
+  border:1px solid var(--line);border-radius:8px;background:#0a0a09;
+  padding:28px;max-width:760px;font-size:14px;line-height:1.9;
+}
+.term .bar{display:flex;gap:7px;margin-bottom:20px}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.term .bar i:first-child{background:var(--accent)}
+.term .p{color:var(--green)}
+.term .c{color:var(--white)}
+.term .d{color:var(--dim)}
+.term .a{color:var(--accent)}
+
+/* footer */
+footer{padding:80px 6vw 60px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+footer .mark{
+  font-family:'Anton',Impact,sans-serif;font-size:clamp(40px,6vw,80px);
+  text-transform:uppercase;line-height:1;
+}
+footer .mark .accent{color:var(--accent)}
+footer .meta{font-size:12px;color:var(--dim);letter-spacing:.06em;text-align:right}
+footer .meta a{color:var(--white);text-decoration:none;border-bottom:1px solid var(--line)}
+footer img{width:64px;image-rendering:pixelated;margin-top:14px}
+
+/* guac flash */
+#guac{
+  position:fixed;inset:0;z-index:200;display:none;
+  align-items:center;justify-content:center;background:rgba(0,0,0,.88);
+}
+#guac.show{display:flex}
+#guac .inner{text-align:center}
+#guac h3{font-family:'Anton',Impact,sans-serif;font-size:clamp(40px,8vw,110px);color:var(--green);text-transform:uppercase;line-height:1}
+#guac p{color:var(--dim);margin-top:14px;font-size:13px;letter-spacing:.2em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark">TERABYTE_</div>
+  <div class="nav-links">
+    <a href="#specs">the specs</a>
+    <a href="#manifesto">manifesto</a>
+    <a href="#readme">readme</a>
+    <button id="soundBtn" type="button">SOUND: OFF</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-kicker">A MAGAZINE ABOUT COMPUTE PRESENTS</div>
+  <h1>TERABYTE<br><span class="accent">BURRITOS.</span></h1>
+  <p class="hero-sub">1 terabyte = 1,000,000,000,000 bytes. 1 burrito = 1,000,000,000,000 bites. <em>we did the math.</em></p>
+  <svg class="hero-burrito" id="burritoHero" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-label="pixel burrito"></svg>
+  <div class="scroll-cue">SCROLL FOR SPECS</div>
+</header>
+
+<div class="marquee"><div class="marquee-track" id="marquee"></div></div>
+
+<section id="specs">
+  <div class="kicker">SPEC SHEET - BUILD 001</div>
+  <h2>THE <span class="accent">SPECS</span></h2>
+  <div class="spec"><div class="k">TORTILLA</div><div class="v"><b>12" flour.</b> warm-swapped nightly. zero downtime.</div></div>
+  <div class="spec"><div class="k">RICE</div><div class="v"><b>cilantro-lime.</b> cached fresh every hour.</div></div>
+  <div class="spec"><div class="k">BEANS</div><div class="v"><b>black.</b> refactored daily.</div></div>
+  <div class="spec"><div class="k">PROTEIN</div><div class="v"><b>carne asada.</b> overclocked to 5.1GHz. runs hot.</div></div>
+  <div class="spec hot"><div class="k">GUACAMOLE</div><div class="v"><b>8-bit.</b> costs extra. known issue. won't fix.</div></div>
+  <div class="spec"><div class="k">SALSA</div><div class="v"><b>open-source.</b> fork freely.</div></div>
+  <div class="spec"><div class="k">CHEESE</div><div class="v"><b>shredded.</b> lossless compression.</div></div>
+  <div class="spec"><div class="k">FOIL</div><div class="v"><b>aluminum.</b> end-to-end encryption.</div></div>
+</section>
+
+<section id="manifesto" class="manifesto">
+  <div class="kicker">WHY BURRITOS</div>
+  <p>A burrito is the most <span class="accent">efficient</span> meal ever shipped.</p>
+  <p class="dim">Portable. Self-contained. Zero dependencies.</p>
+  <p>Everything compiles into <span class="accent">one cylinder.</span></p>
+  <div class="note">we make a magazine about compute, acceleration, and the people building the future. the future still needs lunch. this is the lunch.</div>
+</section>
+
+<section id="readme">
+  <div class="kicker">DOCUMENTATION</div>
+  <h2>READ <span class="accent">ME</span></h2>
+  <div class="term">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <div><span class="p">jacob@terabyte</span><span class="d">:~$</span> <span class="c">cat README.md</span></div>
+    <div class="d">&gt; TERABYTE is a magazine about compute, acceleration,</div>
+    <div class="d">&gt; and the people building the future.</div>
+    <div class="d">&gt; this page is about a burrito.</div>
+    <div class="d">&gt; the burrito is not real yet. neither is the magazine.</div>
+    <div class="d">&gt; <span class="a">both are coming.</span></div>
+    <div>&nbsp;</div>
+    <div><span class="p">jacob@terabyte</span><span class="d">:~$</span> <span class="c">./order --burrito --extra-guac</span></div>
+    <div class="d">error: taqueria not found. issue 001 drops first.</div>
+    <div class="d">workaround: press <span class="a">&#8593;&#8593;&#8595;&#8595;&#8592;&#8594;&#8592;&#8594; B A</span> for extra guac.</div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="mark">TERA<span class="accent">BYTE_</span></div>
+    <svg id="burritoFoot" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-label="pixel burrito"></svg>
+  </div>
+  <div class="meta">
+    a magazine by <a href="https://jacobegarcia.github.io/accelerate/">jacob garcia</a><br>
+    chiptune soundtrack in production<br>
+    &copy; 2026 - wrapped with care in chicago
+  </div>
+</footer>
+
+<div id="guac"><div class="inner">
+  <h3>EXTRA GUAC<br>UNLOCKED</h3>
+  <p>+$2.50 - WORTH IT</p>
+</div></div>
+
+<script>
+/* ---------- pixel burrito ---------- */
+const PAL = {
+  'T':'#e8b04b','t':'#c98f2e',           // tortilla
+  'G':'#3fa34d','L':'#5cc46a',           // guac / lettuce
+  'R':'#a0522d','M':'#7a3f20',           // rice? no - meat browns
+  'W':'#f4f1ea','S':'#e03e2d',           // rice white / salsa red
+  'F':'#c0c5ce','f':'#8f959f','H':'#eef1f6' // foil
+};
+const ROWS = [
+".....GLRSLG.....",
+"....GRWLSMRG....",
+"...TTTTTTTTTT...",
+"..TTTTTTTTTTTT..",
+"..TTtTTTTtTTTT..",
+"..TTTTTTTTTTTT..",
+"..FFHHFFFFFFFF..",
+"..FHHFFFFFFFFf..",
+"..HHFFFFFFFFFf..",
+"..HFFFFFFFFFFf..",
+"..FFFFFFFFFFFf..",
+"..FFFFFFFFFFf...",
+"..FFFFFFFFFf....",
+"..FfFFFFFFf.....",
+"...FFFFFFf......",
+"....ffFFff......"
+];
+function drawBurrito(svg){
+  const ns = "http://www.w3.org/2000/svg";
+  ROWS.forEach((row,y)=>{
+    [...row].forEach((ch,x)=>{
+      if(!PAL[ch]) return;
+      const r = document.createElementNS(ns,"rect");
+      r.setAttribute("x",x); r.setAttribute("y",y);
+      r.setAttribute("width",1); r.setAttribute("height",1);
+      r.setAttribute("fill",PAL[ch]);
+      svg.appendChild(r);
+    });
+  });
+}
+drawBurrito(document.getElementById('burritoHero'));
+drawBurrito(document.getElementById('burritoFoot'));
+
+/* ---------- marquee ---------- */
+const items = ["FRESHLY WRAPPED","LOSSLESS FLAVOR","ZERO DEPENDENCIES","ALUMINUM-SEALED","8-BIT GUACAMOLE","ONE CYLINDER","OVERCLOCKED ASADA","OPEN-SOURCE SALSA"];
+const half = items.map(t=>`<span>${t} &#10022;</span>`).join("");
+document.getElementById('marquee').innerHTML = half + half;
+
+/* ---------- chiptune ---------- */
+let actx=null, playing=false, loopTimer=null;
+const btn = document.getElementById('soundBtn');
+// lead melody (square) - 32 steps, 0 = rest. midi notes.
+const LEAD = [76,0,79,0, 81,0,79,76, 74,0,76,0, 74,71,74,0,
+              76,0,79,0, 81,83,81,79, 76,0,74,0, 71,0,0,0];
+// bass (triangle), 16 steps
+const BASS = [40,0,40,0, 45,0,45,0, 43,0,43,0, 47,0,47,0,
+              40,0,40,0, 45,0,45,0, 43,0,47,0, 48,0,47,0];
+const STEP = 60/150/2; // 150bpm eighth notes
+function midi(n){return 440*Math.pow(2,(n-69)/12)}
+function tick(i){
+  const t = actx.currentTime;
+  const l = LEAD[i%32];
+  if(l){
+    const o=actx.createOscillator(), g=actx.createGain();
+    o.type='square'; o.frequency.value=midi(l);
+    g.gain.setValueAtTime(0.05,t); g.gain.exponentialRampToValueAtTime(0.001,t+STEP*0.9);
+    o.connect(g).connect(actx.destination); o.start(t); o.stop(t+STEP);
+  }
+  const b = BASS[i%32];
+  if(b){
+    const o=actx.createOscillator(), g=actx.createGain();
+    o.type='triangle'; o.frequency.value=midi(b);
+    g.gain.setValueAtTime(0.09,t); g.gain.exponentialRampToValueAtTime(0.001,t+STEP*0.95);
+    o.connect(g).connect(actx.destination); o.start(t); o.stop(t+STEP);
+  }
+  loopTimer=setTimeout(()=>tick(i+1), STEP*1000);
+}
+btn.addEventListener('click',()=>{
+  if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
+  if(playing){ clearTimeout(loopTimer); playing=false; btn.textContent='SOUND: OFF'; }
+  else{ actx.resume(); playing=true; btn.textContent='SOUND: ON'; tick(0); }
+});
+
+/* ---------- konami guac ---------- */
+const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let kpos=0;
+document.addEventListener('keydown',e=>{
+  kpos = (e.key===KONAMI[kpos]) ? kpos+1 : (e.key===KONAMI[0]?1:0);
+  if(kpos===KONAMI.length){
+    kpos=0;
+    const g=document.getElementById('guac');
+    g.classList.add('show');
+    setTimeout(()=>g.classList.remove('show'),2600);
+  }
+});
+</script>
+</body>
+</html>
